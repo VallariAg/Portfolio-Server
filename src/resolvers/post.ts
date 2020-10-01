@@ -24,6 +24,8 @@ export class PostResolver {
         @Arg('description', () => String, { nullable: true }) description: string,
         @Ctx() { em }: MyContext
     ): Promise<Post> {
+        if (typeof description == 'undefined') { description = "" }
+        if (typeof body == 'undefined') { body = "" }
         const post = em.create(Post, { title, body, description })
         await em.persistAndFlush(post)
         return post;

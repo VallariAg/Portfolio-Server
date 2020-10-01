@@ -2,7 +2,7 @@
 
 ## Prerequisites
 - install node
-- install postgres
+- install [postgres](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-18-04)
   
 
 Make a postgres table "blogs":
@@ -91,3 +91,9 @@ mutation {
 }
 ```
 
+# Tech Stack
+- typescript node
+- GraphQL
+- express
+- [mikro-orm](https://mikro-orm.io/)
+- postgres
