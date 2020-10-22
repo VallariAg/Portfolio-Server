@@ -7,7 +7,9 @@ import express from "express";
 import { ApolloServer } from "apollo-server-express"
 import { buildSchema } from "type-graphql"
 import { PostResolver } from "./resolvers/post";
-
+import { AdminResolver } from "./resolvers/admin";
+import { readdirSync } from "fs";
+import { ArtPosts } from "./resolvers/artPosts";
 
 const main = async () => {
     const orm = await MikroORM.init(microConfig);
@@ -15,9 +17,11 @@ const main = async () => {
 
     const app = express();
 
+    app.use(express.static(__dirname + '/../content'));
+
     const apolloServer = new ApolloServer({
         schema: await buildSchema({
-            resolvers: [PostResolver],
+            resolvers: [PostResolver, AdminResolver, ArtPosts],
             validate: false,
         }),
         context: () => ({ em: orm.em })
@@ -28,10 +32,7 @@ const main = async () => {
     app.listen(4000, () => {
         console.log("start server on port 4000")
     })
-    // const post = orm.em.create(Post, { title: "new post!" });
-    // await orm.em.persistAndFlush(post);
-    // const posts = await orm.em.find(Post, {});
-    // console.log(posts)
+
 }
 
 main().catch((err) => { console.error(err) });
