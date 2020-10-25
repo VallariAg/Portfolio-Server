@@ -8,7 +8,6 @@ import { ApolloServer } from "apollo-server-express"
 import { buildSchema } from "type-graphql"
 import { PostResolver } from "./resolvers/post";
 import { AdminResolver } from "./resolvers/admin";
-import { readdirSync } from "fs";
 import { ArtPosts } from "./resolvers/artPosts";
 
 const main = async () => {
