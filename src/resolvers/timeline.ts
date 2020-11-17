@@ -1,13 +1,15 @@
 import { Timeline } from "../entities/Timeline";
 import { Resolver, Query, Ctx, Mutation, Arg } from "type-graphql";
 import { MyContext } from "src/types";
+// import { QueryOrder } from "@mikro-orm/core";
+import { QueryOrder } from "@mikro-orm/core/enums";
 
 
 @Resolver()
 export class TimelineResolver {
     @Query(() => [Timeline])
     allContent(@Ctx() { em }: MyContext): Promise<Timeline[] | null> {
-        return em.find(Timeline, {});
+        return em.find(Timeline, {}, { orderBy: { time: QueryOrder.DESC } });
     }
 
     @Mutation(() => Timeline, { nullable: true })

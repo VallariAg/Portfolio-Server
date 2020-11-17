@@ -1,12 +1,14 @@
 import { Resolver, Query, Ctx, Arg, Int, Mutation } from "type-graphql";
 import { MyContext } from "../types";
 import { Post } from "../entities/Post";
+import { QueryOrder } from "@mikro-orm/core/enums";
+// import { QueryOrder } from "@mikro-orm/core";
 
 @Resolver()
 export class PostResolver {
     @Query(() => [Post])
     posts(@Ctx() { em }: MyContext): Promise<Post[] | null> {
-        return em.find(Post, {});
+        return em.find(Post, {}, { orderBy: { id: QueryOrder.ASC } });
     }
 
     @Query(() => Post, { nullable: true })
