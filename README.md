@@ -44,52 +44,32 @@ yarn watch
 yarn dev
 ```
 ## Use
-Go to garphql playground: http://localhost:4000/graphql
+Go to garphQL playground: http://localhost:4000/graphql
 
-Create a new post:
-```
-mutation {
-  createPost(title: "a new post") {
-    id
-    title
-    createdAt
-  }
-}
-```
-Update a post:
-```
-mutation {
-  updatePost(id: 1, body: "updating post") {
-    body 
-    id
-    title
-  }
-}
-```
-Read all posts:
-```
-query {
-  posts{
-    title
-    id
-  }
-}
-```
-Read one post:
-```
-query {
-  post(id: 1){
-    title
-    id
-  }
-}
-```
-Delete a post:
-```
-mutation {
-  deletePost(id: 1) 
-}
-```
+1. Blog posts:
+    - posts :GET all posts
+    - post(id): GET post of id
+    - createPost
+    - updatePost(id)
+    - DeletePost(id)
+
+('posts' fetchs all blogs in ASC order of 'id')
+
+2. Timeline posts:
+    - allContent: GET all timeline content
+    - createContent
+    - updateContent
+    - deleteContent
+
+('allContent' fetchs all timeline content in DESC order of 'time')
+
+3. getPassword: returns SHA encrypted password *hardcoded* in resolver    
+
+4. Static content: 
+    '/' serves /content/
+- Images inside Blogs are fetched from /content/blog/{blogID}/
+- Blog's header/card image are fetched from /content/blog/{blogID}/{blogID}.jpg
+
 
 # Tech Stack
 - typescript node
