@@ -5,9 +5,9 @@ import path from "path";
 import { Timeline } from "./entities/Timeline";
 
 export default {
-    dbName: "blogs",
-    user: "postgres",
-    password: "postgres",
+    dbName: process.env.DATABASE_NAME,
+    user: process.env.DATABASE_USER,
+    password: process.env.DATABASE_PASSWORD,
     entities: [Post, Timeline],
     type: "postgresql",
     debug: !__prod__,
